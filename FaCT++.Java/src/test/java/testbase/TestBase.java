@@ -9,8 +9,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
-import uk.ac.manchester.cs.factplusplus.owlapiv3.FaCTPlusPlusReasonerFactory;
-
+import uk.ac.manchester.cs.factplusplus.owlapi.FaCTPlusPlusReasonerFactory;
 import uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl;
 import uk.ac.manchester.cs.owl.owlapi.concurrent.NoOpReadWriteLock;
 

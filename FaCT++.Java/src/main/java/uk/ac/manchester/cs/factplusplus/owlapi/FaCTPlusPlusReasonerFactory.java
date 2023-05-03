@@ -1,4 +1,4 @@
-package uk.ac.manchester.cs.factplusplus.owlapiv3;
+package uk.ac.manchester.cs.factplusplus.owlapi;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.BufferingMode;
