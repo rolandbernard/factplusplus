@@ -29,13 +29,16 @@ package uk.ac.manchester.cs.factplusplus;
 public class QuietProgressMonitor implements FaCTPlusPlusProgressMonitor {
 
     @Override
-    public void setClassificationStarted(int classCount) {}
+    public void setClassificationStarted(int classCount) {
+    }
 
     @Override
-    public void nextClass() {}
+    public void nextClass() {
+    }
 
     @Override
-    public void setFinished() {}
+    public void setFinished() {
+    }
 
     @Override
     public boolean isCancelled() {

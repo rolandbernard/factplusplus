@@ -69,6 +69,19 @@
 						-Djava.library.path=${project.build.directory}/classes/lib/native/64bit</argLine>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>net.revelc.code.formatter</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<configFile>${project.basedir}/formatter-config.xml</configFile>
+					<directories>
+						<directory>${project.build.sourceDirectory}</directory>
+						<directory>${project.basedir}/src</directory>
+						<directory>${project.build.directory}/generated-sources</directory>
+					</directories>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

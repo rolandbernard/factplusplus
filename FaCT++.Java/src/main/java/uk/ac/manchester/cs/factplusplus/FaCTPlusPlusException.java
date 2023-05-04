@@ -34,7 +34,7 @@ public class FaCTPlusPlusException extends OWLRuntimeException {
 
     /**
      * @param message
-     *        message
+     *            message
      */
     public FaCTPlusPlusException(String message) {
         super(message);
@@ -42,9 +42,9 @@ public class FaCTPlusPlusException extends OWLRuntimeException {
 
     /**
      * @param message
-     *        message
+     *            message
      * @param cause
-     *        cause
+     *            cause
      */
     public FaCTPlusPlusException(String message, Throwable cause) {
         super(message, cause);
@@ -52,7 +52,7 @@ public class FaCTPlusPlusException extends OWLRuntimeException {
 
     /**
      * @param cause
-     *        cause
+     *            cause
      */
     public FaCTPlusPlusException(Throwable cause) {
         super(cause);

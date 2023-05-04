@@ -337,9 +337,8 @@ public class VerifyComplianceOWLSNewFeaturesTestCase extends VerifyComplianceBas
     }
 
     @Test
-    public void
-            shouldPassgetObjectPropertyRangesisPresentedByfalseBasicOntology()
-                    throws OWLOntologyCreationException {
+    public void shouldPassgetObjectPropertyRangesisPresentedByfalseBasicOntology()
+            throws OWLOntologyCreationException {
         String inputString = "Prefix(:=<http://www.w3.org/2002/07/owl#>)\n"
                 + "Prefix(owl:=<http://www.w3.org/2002/07/owl#>)\n"
                 + "Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)\n"

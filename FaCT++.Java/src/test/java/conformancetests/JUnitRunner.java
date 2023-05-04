@@ -65,8 +65,7 @@ public class JUnitRunner {
         return reasoner.isConsistent();
     }
 
-    private static boolean
-            isEntailed(OWLReasoner reasoner, OWLAxiom conclusion) {
+    private static boolean isEntailed(OWLReasoner reasoner, OWLAxiom conclusion) {
         return reasoner.isEntailed(conclusion);
     }
 

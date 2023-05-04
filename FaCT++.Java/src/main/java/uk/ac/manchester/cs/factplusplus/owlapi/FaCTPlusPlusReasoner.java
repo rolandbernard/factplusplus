@@ -121,9 +121,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * then the changes will be stored in a buffer. If the reasoner is a
      * non-buffering reasoner then the changes will be automatically flushed
      * through to the change filter and passed on to the reasoner.
-     * 
+     *
      * @param changes
-     *        The list of raw changes.
+     *            The list of raw changes.
      */
     private synchronized void handleRawOntologyChanges(
             List<? extends OWLOntologyChange> changes) {
@@ -191,13 +191,13 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * removed from the list of pending changes. Note that even if the list of
      * pending changes is non-empty then there may be no changes for the
      * reasoner to deal with.
-     * 
+     *
      * @param added
-     *        The logical axioms that have been added to the imports closure of
-     *        the reasoner root ontology
+     *            The logical axioms that have been added to the imports closure of
+     *            the reasoner root ontology
      * @param removed
-     *        The logical axioms that have been removed from the imports closure
-     *        of the reasoner root ontology
+     *            The logical axioms that have been removed from the imports closure
+     *            of the reasoner root ontology
      */
     private synchronized void computeDiff(Set<OWLAxiom> added,
             Set<OWLAxiom> removed) {
@@ -218,7 +218,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * Gets the axioms that should be currently being reasoned over.
-     * 
+     *
      * @return A collections of axioms (not containing duplicates) that the
      *         reasoner should be taking into consideration when reasoning. This
      *         set of axioms many not correspond to the current state of the
@@ -248,11 +248,11 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param rootOntology
-     *        ontology
+     *            ontology
      * @param configuration
-     *        configuration
+     *            configuration
      * @param bufferingMode
-     *        buffering
+     *            buffering
      */
     public FaCTPlusPlusReasoner(OWLOntology rootOntology,
             OWLReasonerConfiguration configuration, BufferingMode bufferingMode) {
@@ -321,11 +321,11 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * Asks the reasoner implementation to handle axiom additions and removals
      * from the imports closure of the root ontology. The changes will not
      * include annotation axiom additions and removals.
-     * 
+     *
      * @param addAxioms
-     *        The axioms to be added to the reasoner.
+     *            The axioms to be added to the reasoner.
      * @param removeAxioms
-     *        The axioms to be removed from the reasoner
+     *            The axioms to be removed from the reasoner
      */
     protected void handleChanges(Set<OWLAxiom> addAxioms,
             Set<OWLAxiom> removeAxioms) {
@@ -429,11 +429,10 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     }
 
     @Override
-    public synchronized boolean
-            isSatisfiable(OWLClassExpression classExpression)
-                    throws ReasonerInterruptedException, TimeOutException,
-                    ClassExpressionNotInProfileException,
-                    FreshEntitiesException, InconsistentOntologyException {
+    public synchronized boolean isSatisfiable(OWLClassExpression classExpression)
+            throws ReasonerInterruptedException, TimeOutException,
+            ClassExpressionNotInProfileException,
+            FreshEntitiesException, InconsistentOntologyException {
         checkConsistency();
         return kernel.isClassSatisfiable(toClassPointer(classExpression));
     }
@@ -489,7 +488,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     // tracing
     /**
      * @param axiom
-     *        axiom to trace
+     *            axiom to trace
      * @return tracing set (set of axioms that were participate in achieving
      *         result) for a given entailment. Return empty set if the axiom is
      *         not entailed.
@@ -570,40 +569,36 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     }
 
     @Override
-    public synchronized NodeSet<OWLObjectPropertyExpression>
-            getSubObjectProperties(OWLObjectPropertyExpression pe,
-                    boolean direct) throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public synchronized NodeSet<OWLObjectPropertyExpression> getSubObjectProperties(OWLObjectPropertyExpression pe,
+            boolean direct) throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         checkConsistency();
         return objectPropertyTranslator.getNodeSetFromPointers(kernel
                 .askSubObjectProperties(toObjectPropertyPointer(pe), direct));
     }
 
     @Override
-    public synchronized NodeSet<OWLObjectPropertyExpression>
-            getSuperObjectProperties(OWLObjectPropertyExpression pe,
-                    boolean direct) throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public synchronized NodeSet<OWLObjectPropertyExpression> getSuperObjectProperties(OWLObjectPropertyExpression pe,
+            boolean direct) throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         checkConsistency();
         return objectPropertyTranslator.getNodeSetFromPointers(kernel
                 .askSuperObjectProperties(toObjectPropertyPointer(pe), direct));
     }
 
     @Override
-    public synchronized Node<OWLObjectPropertyExpression>
-            getEquivalentObjectProperties(OWLObjectPropertyExpression pe)
-                    throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public synchronized Node<OWLObjectPropertyExpression> getEquivalentObjectProperties(OWLObjectPropertyExpression pe)
+            throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         checkConsistency();
         return objectPropertyTranslator.getNodeFromPointers(kernel
                 .askEquivalentObjectProperties(toObjectPropertyPointer(pe)));
     }
 
     @Override
-    public synchronized NodeSet<OWLObjectPropertyExpression>
-            getDisjointObjectProperties(OWLObjectPropertyExpression pe)
-                    throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public synchronized NodeSet<OWLObjectPropertyExpression> getDisjointObjectProperties(OWLObjectPropertyExpression pe)
+            throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         checkConsistency();
         // TODO: incomplete
         OWLObjectPropertyNodeSet toReturn = new OWLObjectPropertyNodeSet();
@@ -612,10 +607,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     }
 
     @Override
-    public synchronized Node<OWLObjectPropertyExpression>
-            getInverseObjectProperties(OWLObjectPropertyExpression pe)
-                    throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public synchronized Node<OWLObjectPropertyExpression> getInverseObjectProperties(OWLObjectPropertyExpression pe)
+            throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         checkConsistency();
         return objectPropertyTranslator.getNodeFromPointers(kernel
                 .askEquivalentObjectProperties(toObjectPropertyPointer(pe
@@ -774,14 +768,14 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * s-successor and those are related via OP: r op s
      *
      * @param individuals
-     *        set of individuals to choose from
+     *            set of individuals to choose from
      * @param r
-     *        first operand of the comparison
+     *            first operand of the comparison
      * @param s
-     *        second operand of the comparison
+     *            second operand of the comparison
      * @param op
-     *        comparison operation: 0 means "==", 1 means "!=", 2 means "&lt;",
-     *        3 means "&lt;=", 4 means "&gt;", 5 means "&gt;="
+     *            comparison operation: 0 means "==", 1 means "!=", 2 means "&lt;",
+     *            3 means "&lt;=", 4 means "&gt;", 5 means "&gt;="
      * @return data related individuals
      */
     public Node<OWLNamedIndividual> getDataRelatedIndividuals(
@@ -959,13 +953,14 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
                 calendar.setTimezone(0);
             }
             long l = calendar.toGregorianCalendar().getTimeInMillis();
-//            System.out.println("FaCTPlusPlusReasoner.convertToLongDateTime()\n"
-//                    + input + "\n" + Long.toString(l));
+            // System.out.println("FaCTPlusPlusReasoner.convertToLongDateTime()\n"
+            // + input + "\n" + Long.toString(l));
             return Long.toString(l);
         } catch (DatatypeConfigurationException e) {
             throw new OWLRuntimeException(
                     "Error: the datatype support in the Java VM is broken! Cannot parse: "
-                            + input, e);
+                            + input,
+                    e);
         }
     }
 
@@ -999,7 +994,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
             OWLEntityTranslator<OWLClass, ClassPointer> implements
             OWLClassExpressionVisitorEx<ClassPointer> {
 
-        public ClassExpressionTranslator() {}
+        public ClassExpressionTranslator() {
+        }
 
         @Override
         protected ClassPointer getTopEntityPointer() {
@@ -1165,7 +1161,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
             OWLEntityTranslator<OWLDatatype, DataTypePointer> implements
             OWLDataRangeVisitorEx<DataTypeExpressionPointer> {
 
-        public DataRangeTranslator() {}
+        public DataRangeTranslator() {
+        }
 
         @Override
         protected DataTypePointer getTopEntityPointer() {
@@ -1288,7 +1285,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     private class IndividualTranslator extends
             OWLEntityTranslator<OWLNamedIndividual, IndividualPointer> {
 
-        public IndividualTranslator() {}
+        public IndividualTranslator() {
+        }
 
         @Override
         protected IndividualPointer getTopEntityPointer() {
@@ -1331,7 +1329,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
             extends
             OWLEntityTranslator<OWLObjectPropertyExpression, ObjectPropertyPointer> {
 
-        public ObjectPropertyTranslator() {}
+        public ObjectPropertyTranslator() {
+        }
 
         @Override
         protected ObjectPropertyPointer getTopEntityPointer() {
@@ -1380,8 +1379,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
         }
 
         @Override
-        protected DefaultNodeSet<OWLObjectPropertyExpression>
-                createDefaultNodeSet() {
+        protected DefaultNodeSet<OWLObjectPropertyExpression> createDefaultNodeSet() {
             return new OWLObjectPropertyNodeSet();
         }
     }
@@ -1389,7 +1387,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     private class DataPropertyTranslator extends
             OWLEntityTranslator<OWLDataProperty, DataPropertyPointer> {
 
-        public DataPropertyTranslator() {}
+        public DataPropertyTranslator() {
+        }
 
         @Override
         protected DataPropertyPointer getTopEntityPointer() {
@@ -1433,7 +1432,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
         private final class DeclarationVisitorEx implements
                 OWLEntityVisitorEx<AxiomPointer> {
 
-            public DeclarationVisitorEx() {}
+            public DeclarationVisitorEx() {
+            }
 
             @Override
             public AxiomPointer visit(OWLClass cls) {
@@ -1483,8 +1483,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
         }
 
         @Override
-        public AxiomPointer
-                visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
+        public AxiomPointer visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
             return kernel.tellNotRelatedIndividuals(
                     toIndividualPointer(axiom.getSubject()),
                     toObjectPropertyPointer(axiom.getProperty()),
@@ -1705,8 +1704,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
         }
 
         @Override
-        public AxiomPointer
-                visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
+        public AxiomPointer visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
             return kernel
                     .tellInverseFunctionalObjectProperty(toObjectPropertyPointer(axiom
                             .getProperty()));
@@ -1780,7 +1778,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     private class EntailmentChecker implements OWLAxiomVisitorEx<Boolean> {
 
-        public EntailmentChecker() {}
+        public EntailmentChecker() {
+        }
 
         @Override
         public Boolean visit(OWLSubClassOfAxiom axiom) {
@@ -2150,9 +2149,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param pw
-     *        printstream
+     *            printstream
      * @param includeBottomNode
-     *        true if bottom node included
+     *            true if bottom node included
      */
     public void dumpClassHierarchy(PrintStream pw, boolean includeBottomNode) {
         dumpSubClasses(getTopClassNode(), pw, 0, includeBottomNode);
@@ -2174,7 +2173,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param expression
-     *        expression to find
+     *            expression to find
      * @return root node for expression
      */
     public NodePointer getRoot(OWLClassExpression expression) {
@@ -2183,9 +2182,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param object
-     *        object to check
+     *            object to check
      * @param deterministicOnly
-     *        true if deterministic only
+     *            true if deterministic only
      * @return neighbors
      */
     public Node<? extends OWLObjectPropertyExpression> getObjectNeighbours(
@@ -2196,9 +2195,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param object
-     *        object to check
+     *            object to check
      * @param deterministicOnly
-     *        true if deterministic only
+     *            true if deterministic only
      * @return neighbors
      */
     public Node<OWLDataProperty> getDataNeighbours(NodePointer object,
@@ -2209,9 +2208,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param n
-     *        object to check
+     *            object to check
      * @param property
-     *        property to follow
+     *            property to follow
      * @return neighbors
      */
     public Collection<NodePointer> getObjectNeighbours(NodePointer n,
@@ -2222,9 +2221,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param n
-     *        object to check
+     *            object to check
      * @param property
-     *        property to follow
+     *            property to follow
      * @return neighbors
      */
     public Collection<NodePointer> getDataNeighbours(NodePointer n,
@@ -2235,9 +2234,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param object
-     *        object to check
+     *            object to check
      * @param deterministicOnly
-     *        true if deterministic only
+     *            true if deterministic only
      * @return neighbors
      */
     public Node<? extends OWLClassExpression> getObjectLabel(
@@ -2248,9 +2247,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param object
-     *        object to check
+     *            object to check
      * @param deterministicOnly
-     *        true if deterministic only
+     *            true if deterministic only
      * @return neighbors
      */
     public Node<? extends OWLDataRange> getDataLabel(NodePointer object,
@@ -2261,7 +2260,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param object
-     *        node pointer
+     *            node pointer
      * @return blocker for object
      */
     public NodePointer getBlocker(NodePointer object) {
@@ -2271,9 +2270,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     /**
      * Translate OWLAPI enum for the type of module into the interface-friendly
      * int
-     * 
+     *
      * @param moduleType
-     *        module type
+     *            module type
      * @return index
      */
     private static int getIndexByModuleType(ModuleType moduleType) {
@@ -2292,9 +2291,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     /**
      * Translate OWLAPI enum for the method of modularisation into the
      * interface-friendly int
-     * 
+     *
      * @param moduleMethod
-     *        module type
+     *            module type
      * @return index
      */
     private static int getIndexByModuleMethod(ModuleMethod moduleMethod) {
@@ -2312,13 +2311,13 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * Build an atomic decomposition using syntactic/semantic locality checking
-     * 
+     *
      * @param moduleMethod
-     *        if true, use semantic locality checking; if false, use syntactic
-     *        one
+     *            if true, use semantic locality checking; if false, use syntactic
+     *            one
      * @param moduleType
-     *        if 0, use \bot modules; if 1, use \top modules; if 2, use STAR
-     *        modules
+     *            if 0, use \bot modules; if 1, use \top modules; if 2, use STAR
+     *            modules
      * @return the size of the constructed atomic decomposition
      */
     public int getAtomicDecompositionSize(ModuleMethod moduleMethod,
@@ -2330,7 +2329,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param index
-     *        index of atom
+     *            index of atom
      * @return atom
      */
     public Set<OWLAxiom> getAtomAxioms(int index) {
@@ -2340,7 +2339,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param index
-     *        index of module
+     *            index of module
      * @return module
      */
     public Set<OWLAxiom> getAtomModule(int index) {
@@ -2361,7 +2360,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param index
-     *        atom index
+     *            atom index
      * @return atom dependents indexes
      */
     public int[] getAtomDependents(int index) {
@@ -2377,7 +2376,8 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     private final class EntityVisitorEx implements OWLEntityVisitorEx<Pointer> {
 
-        public EntityVisitorEx() {}
+        public EntityVisitorEx() {
+        }
 
         @Override
         public Pointer visit(OWLClass cls) {
@@ -2414,13 +2414,13 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param signature
-     *        if true, use semantic locality checking; if false, use syntactic
-     *        one
+     *            if true, use semantic locality checking; if false, use syntactic
+     *            one
      * @param moduleMethod
-     *        module method
+     *            module method
      * @param moduleType
-     *        if 0, use \bot modules; if 1, use \top modules; if 2, use STAR
-     *        modules
+     *            if 0, use \bot modules; if 1, use \top modules; if 2, use STAR
+     *            modules
      * @return module
      */
     public Set<OWLAxiom> getModule(Set<OWLEntity> signature,
@@ -2437,11 +2437,11 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * @param signature
-     *        signature
+     *            signature
      * @param moduleMethod
-     *        module method
+     *            module method
      * @param moduleType
-     *        module type
+     *            module type
      * @return non local axioms
      */
     public Set<OWLAxiom> getNonLocal(Set<OWLEntity> signature,
@@ -2461,7 +2461,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      */
     /**
      * @param name
-     *        save/load context name
+     *            save/load context name
      * @return true iff the file exists
      */
     public boolean checkSaveLoadContext(String name) {
@@ -2474,10 +2474,10 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * there. If the file exists, the once classified taxonomy will be loaded
      * from there. If the parameter is null, no loading of taxonomy is
      * performed.
-     * 
+     *
      * @param name
-     *        save/load file name. Do not load the pre-classified taxonomy if
-     *        null
+     *            save/load file name. Do not load the pre-classified taxonomy if
+     *            null
      * @return true if successful
      */
     public boolean setSaveLoadContext(String name) {
@@ -2486,9 +2486,9 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     /**
      * Clear the saved reasoner state in the file name
-     * 
+     *
      * @param name
-     *        save/load file name
+     *            save/load file name
      * @return true if successful
      */
     public boolean clearSaveLoadContext(String name) {

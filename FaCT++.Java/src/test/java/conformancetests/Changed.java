@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Denotes a change in tests.
- * 
+ *
  * @author ignazio
  */
 @Retention(RetentionPolicy.CLASS)

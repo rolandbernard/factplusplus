@@ -47,10 +47,10 @@ import conformancetests.TestClasses;
 @SuppressWarnings("javadoc")
 public class FppBrokenTestCase extends TestBase {
 
-	// A number of test cases from VerifyComplianceOWLSNewFeatures:
-	// -- disjoint data/object properties queries are not supported
-	// A number of test cases from VerifyCompliance People/University:
-	// -- bug in bottom-up traversing taxonomy in presence of individuals
+    // A number of test cases from VerifyComplianceOWLSNewFeatures:
+    // -- disjoint data/object properties queries are not supported
+    // A number of test cases from VerifyCompliance People/University:
+    // -- bug in bottom-up traversing taxonomy in presence of individuals
 
     @Test
     // FaCT++ datatype problems
@@ -176,7 +176,6 @@ public class FppBrokenTestCase extends TestBase {
         r.run();
     }
 
-
     @Test
     // @Ignore("FaCT++ vs OWL API mismatch")
     // from WebOnt_AnnotationProperty_002_TestCase
@@ -229,7 +228,8 @@ public class FppBrokenTestCase extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertFalse(
                 "Ontology was supposed to be inconsistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -284,7 +284,8 @@ public class FppBrokenTestCase extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertTrue(
                 "Ontology was supposed to be consistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -310,7 +311,8 @@ public class FppBrokenTestCase extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertFalse(
                 "Ontology was supposed to be inconsistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -345,32 +347,32 @@ public class FppBrokenTestCase extends TestBase {
                 r.isEntailed(f.getOWLClassAssertionAxiom(c, x)));
     }
 
-	@Test
-	// @Ignore("FaCT++ datatype problems")
-	// from OWL2TestCase
-	public void testDatatype_DataComplementOf_001() {
-		String premise = "<?xml version=\"1.0\"?>\n" + "<rdf:RDF\n"
-				+ "  xml:base  = \"http://example.org/\" xmlns     = \"http://example.org/\" xmlns:owl = \"http://www.w3.org/2002/07/owl#\" xmlns:rdf = \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:rdfs= \"http://www.w3.org/2000/01/rdf-schema#\" >\n"
-				+ '\n' + "<owl:Ontology/>\n" + '\n' + "<owl:DatatypeProperty rdf:about=\"p\" />\n" + '\n'
-				+ "<rdf:Description rdf:about=\"p\">\n" + "  <rdfs:range>\n" + "    <rdfs:Datatype>\n"
-				+ "      <owl:datatypeComplementOf rdf:resource=\"http://www.w3.org/2001/XMLSchema#positiveInteger\" /></rdfs:Datatype></rdfs:range></rdf:Description>\n"
-				+ '\n' + "<rdf:Description rdf:about=\"i\">\n"
-				+ "  <p rdf:datatype=\"http://www.w3.org/2001/XMLSchema#negativeInteger\">-1</p>\n"
-				+ "  <p rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">A string</p></rdf:Description>\n"
-				+ '\n' + "</rdf:RDF>";
-		String conclusion = "";
-		String id = "Datatype_DataComplementOf_001";
-		TestClasses tc = TestClasses.valueOf("CONSISTENCY");
-		String d = "Demonstrates that the complement of a datatype contains literals from other datatypes.";
-		JUnitRunner r = new JUnitRunner(premise, conclusion, id, tc, d);
-		r.setReasonerFactory(factory());
-		r.run();
-	}
+    @Test
+    // @Ignore("FaCT++ datatype problems")
+    // from OWL2TestCase
+    public void testDatatype_DataComplementOf_001() {
+        String premise = "<?xml version=\"1.0\"?>\n" + "<rdf:RDF\n"
+                + "  xml:base  = \"http://example.org/\" xmlns     = \"http://example.org/\" xmlns:owl = \"http://www.w3.org/2002/07/owl#\" xmlns:rdf = \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:rdfs= \"http://www.w3.org/2000/01/rdf-schema#\" >\n"
+                + '\n' + "<owl:Ontology/>\n" + '\n' + "<owl:DatatypeProperty rdf:about=\"p\" />\n" + '\n'
+                + "<rdf:Description rdf:about=\"p\">\n" + "  <rdfs:range>\n" + "    <rdfs:Datatype>\n"
+                + "      <owl:datatypeComplementOf rdf:resource=\"http://www.w3.org/2001/XMLSchema#positiveInteger\" /></rdfs:Datatype></rdfs:range></rdf:Description>\n"
+                + '\n' + "<rdf:Description rdf:about=\"i\">\n"
+                + "  <p rdf:datatype=\"http://www.w3.org/2001/XMLSchema#negativeInteger\">-1</p>\n"
+                + "  <p rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">A string</p></rdf:Description>\n"
+                + '\n' + "</rdf:RDF>";
+        String conclusion = "";
+        String id = "Datatype_DataComplementOf_001";
+        TestClasses tc = TestClasses.valueOf("CONSISTENCY");
+        String d = "Demonstrates that the complement of a datatype contains literals from other datatypes.";
+        JUnitRunner r = new JUnitRunner(premise, conclusion, id, tc, d);
+        r.setReasonerFactory(factory());
+        r.run();
+    }
 
-	@Test
+    @Test
     // @Ignore("FaCT++ unsupported datatype")
     // from WebOntTestCase
-	public void testWebOnt_I5_8_007() throws OWLOntologyCreationException {
+    public void testWebOnt_I5_8_007() throws OWLOntologyCreationException {
         OWLOntologyManager m = OWLManager.createOWLOntologyManager();
         OWLDataFactory f = m.getOWLDataFactory();
         OWLOntology o = m.createOntology();
@@ -390,8 +392,7 @@ public class FppBrokenTestCase extends TestBase {
     // @Ignore("FaCT++ datatype problems")
     // from WebOnt_allValuesFrom_001_TestCase
     public void testWebOnt_miscellaneous_202() {
-        String premise =
-        "Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)\n"
+        String premise = "Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)\n"
                 + "Prefix(owl:=<http://www.w3.org/2002/07/owl#>)\n"
                 + "Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)\n"
                 + "Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)\n"

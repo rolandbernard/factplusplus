@@ -26,4 +26,5 @@ package uk.ac.manchester.cs.factplusplus;
  * @author Matthew Horridge, The University Of Manchester, Medical Informatics
  *         Group, 10-Jul-2006
  */
-public class ObjectPropertyPointer extends Pointer {}
+public class ObjectPropertyPointer extends Pointer {
+}

@@ -283,7 +283,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesserviceClassificationfalse() {
-        OWLDataProperty serviceClassification = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
+        OWLDataProperty serviceClassification = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
         // expected bottomDataProperty
         // actual__ serviceClassification, false
         equal(reasoner.getSubDataProperties(serviceClassification, false),
@@ -292,7 +293,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesserviceClassificationfalse() {
-        OWLDataProperty serviceClassification = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
+        OWLDataProperty serviceClassification = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
         // expected topDataProperty
         // actual__ serviceClassification, false
         equal(reasoner.getSuperDataProperties(serviceClassification, false),
@@ -301,7 +303,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesserviceClassificationtrue() {
-        OWLDataProperty serviceClassification = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
+        OWLDataProperty serviceClassification = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
         // expected bottomDataProperty
         // actual__ serviceClassification, true
         equal(reasoner.getSubDataProperties(serviceClassification, true),
@@ -310,7 +313,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesserviceClassificationtrue() {
-        OWLDataProperty serviceClassification = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
+        OWLDataProperty serviceClassification = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceClassification");
         // expected topDataProperty
         // actual__ serviceClassification, true
         equal(reasoner.getSuperDataProperties(serviceClassification, true),
@@ -351,7 +355,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesserviceParameterNamefalse() {
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected bottomDataProperty
         // actual__ serviceParameterName, false
         equal(reasoner.getSubDataProperties(serviceParameterName, false),
@@ -360,7 +365,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesserviceParameterNamefalse() {
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected topDataProperty
         // actual__ serviceParameterName, false
         equal(reasoner.getSuperDataProperties(serviceParameterName, false),
@@ -371,7 +377,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
     public void shouldPassgetDataPropertyDomainsserviceParameterNamefalse() {
         OWLClass Thing = C("http://www.w3.org/2002/07/owl#Thing");
         OWLClass ServiceParameter = C("http://www.daml.org/services/owl-s/1.1/Profile.owl#ServiceParameter");
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected Thing, ServiceParameter
         // actual__ serviceParameterName, false
         equal(reasoner.getDataPropertyDomains(serviceParameterName, false),
@@ -380,7 +387,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesserviceParameterNametrue() {
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected bottomDataProperty
         // actual__ serviceParameterName, true
         equal(reasoner.getSubDataProperties(serviceParameterName, true),
@@ -389,7 +397,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesserviceParameterNametrue() {
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected topDataProperty
         // actual__ serviceParameterName, true
         equal(reasoner.getSuperDataProperties(serviceParameterName, true),
@@ -399,7 +408,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
     @Test
     public void shouldPassgetDataPropertyDomainsserviceParameterNametrue() {
         OWLClass ServiceParameter = C("http://www.daml.org/services/owl-s/1.1/Profile.owl#ServiceParameter");
-        OWLDataProperty serviceParameterName = DP("http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
+        OWLDataProperty serviceParameterName = DP(
+                "http://www.daml.org/services/owl-s/1.1/Profile.owl#serviceParameterName");
         // expected ServiceParameter
         // actual__ serviceParameterName, true
         equal(reasoner.getDataPropertyDomains(serviceParameterName, true),
@@ -465,7 +475,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesexpressionBodyfalse() {
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected bottomDataProperty
         // actual__ expressionBody, false
         equal(reasoner.getSubDataProperties(expressionBody, false),
@@ -474,7 +485,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesexpressionBodyfalse() {
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected topDataProperty
         // actual__ expressionBody, false
         equal(reasoner.getSuperDataProperties(expressionBody, false),
@@ -485,7 +497,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
     public void shouldPassgetDataPropertyDomainsexpressionBodyfalse() {
         OWLClass Thing = C("http://www.w3.org/2002/07/owl#Thing");
         OWLClass Expression = C("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#Expression");
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected Thing, Expression
         // actual__ expressionBody, false
         equal(reasoner.getDataPropertyDomains(expressionBody, false), Thing,
@@ -494,7 +507,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSubDataPropertiesexpressionBodytrue() {
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected bottomDataProperty
         // actual__ expressionBody, true
         equal(reasoner.getSubDataProperties(expressionBody, true),
@@ -503,7 +517,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
 
     @Test
     public void shouldPassgetSuperDataPropertiesexpressionBodytrue() {
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected topDataProperty
         // actual__ expressionBody, true
         equal(reasoner.getSuperDataProperties(expressionBody, true),
@@ -513,7 +528,8 @@ public class VerifyComplianceOWLSTestCase extends VerifyComplianceBase {
     @Test
     public void shouldPassgetDataPropertyDomainsexpressionBodytrue() {
         OWLClass Expression = C("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#Expression");
-        OWLDataProperty expressionBody = DP("http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
+        OWLDataProperty expressionBody = DP(
+                "http://www.daml.org/services/owl-s/1.1/generic/Expression.owl#expressionBody");
         // expected Expression
         // actual__ expressionBody, true
         equal(reasoner.getDataPropertyDomains(expressionBody, true), Expression);

@@ -45,16 +45,16 @@ public class FaCTPlusPlusReasonerFactory implements OWLReasonerFactory {
 
     /**
      * real implementation of the createReasoner method
-     * 
+     *
      * @param ontology
-     *        ontology to reason on
+     *            ontology to reason on
      * @param config
-     *        reasoner configuration
+     *            reasoner configuration
      * @param buffering
-     *        buffering
+     *            buffering
      * @return configured reasoner
      * @throws IllegalConfigurationException
-     *         if the configuration is illegal
+     *             if the configuration is illegal
      */
     protected OWLReasoner createReasoner(OWLOntology ontology,
             OWLReasonerConfiguration config, boolean buffering)

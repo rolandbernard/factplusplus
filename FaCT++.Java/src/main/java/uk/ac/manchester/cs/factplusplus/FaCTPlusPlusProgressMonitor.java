@@ -8,7 +8,7 @@ public interface FaCTPlusPlusProgressMonitor {
 
     /**
      * @param classCount
-     *        number of classes
+     *            number of classes
      */
     void setClassificationStarted(int classCount);
 

@@ -145,8 +145,7 @@ public class FixedTestCase extends TestBase {
 
     @Test
     @Changed(reason = "original test had unreliable iris, e.g., http://example.com/2a")
-    public
-            void testConsistent_but_all_unsat() throws Exception {
+    public void testConsistent_but_all_unsat() throws Exception {
         OWLOntologyManager m = OWLManager.createOWLOntologyManager();
         IRI ontoIRI = IRI("urn:SpecialGetOntology:Consistentbutallunsat");
         OWLOntology o = m.createOntology(ontoIRI);
@@ -293,7 +292,8 @@ public class FixedTestCase extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertTrue(
                 "Ontology was supposed to be consistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -712,8 +712,7 @@ public class FixedTestCase extends TestBase {
 
     @Test
     @Changed(reason = "without declarations, some properties default to datatype properties and some to annotation properties")
-    public
-            void testrdfbased_sem_ndis_alldisjointproperties_fw() {
+    public void testrdfbased_sem_ndis_alldisjointproperties_fw() {
         String premise = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:owl=\"http://www.w3.org/2002/07/owl#\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\" xmlns:ex=\"http://www.example.org#\" xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\">\n"
                 + "  <owl:ObjectProperty rdf:about=\"http://www.example.org#p1\"/>\n"
                 + "  <owl:ObjectProperty rdf:about=\"http://www.example.org#p2\"/>\n"

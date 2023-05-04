@@ -31,7 +31,9 @@ public class WebOnt_miscellaneous_002_TestCase extends TestBase {
     // String id = "WebOnt_miscellaneous_002";
     // TestClasses tc = TestClasses.valueOf("CONSISTENCY");
     // String d =
-    // "Food example taken from the guide. Note that this is the same as the ontology http://www.w3.org/2002/03owlt/miscellaneous/consistent002 imported in other tests.";
+    // "Food example taken from the guide. Note that this is the same as the
+    // ontology http://www.w3.org/2002/03owlt/miscellaneous/consistent002 imported
+    // in other tests.";
     // JUnitRunner r = new JUnitRunner(premise1+premise2+premise3+premise4,
     // conclusion, id, tc, d);
     // r.getConfiguration().setorSortSat(s1);

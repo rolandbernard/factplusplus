@@ -262,8 +262,7 @@ public class WebOntTestCase extends TestBase {
 
     @Test
     @Changed(reason = "test doesn't make sense; This code does the test in a meaningful way")
-    public
-            void testWebOnt_I5_26_009() throws OWLOntologyCreationException {
+    public void testWebOnt_I5_26_009() throws OWLOntologyCreationException {
         OWLOntologyManager m = OWLManager.createOWLOntologyManager();
         OWLOntology o = m.createOntology();
         OWLDataFactory f = m.getOWLDataFactory();

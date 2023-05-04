@@ -64,7 +64,8 @@ public class TestDateTime extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertTrue(
                 "Ontology was supposed to be consistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -86,7 +87,8 @@ public class TestDateTime extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertFalse(
                 "Ontology was supposed to be inconsistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -139,7 +141,8 @@ public class TestDateTime extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertTrue(
                 "Ontology was supposed to be consistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test
@@ -164,7 +167,8 @@ public class TestDateTime extends TestBase {
         OWLReasoner r = factory().createReasoner(o);
         assertFalse(
                 "Ontology was supposed to be inconsistent!\n"
-                        + o.getLogicalAxioms(), r.isConsistent());
+                        + o.getLogicalAxioms(),
+                r.isConsistent());
     }
 
     @Test

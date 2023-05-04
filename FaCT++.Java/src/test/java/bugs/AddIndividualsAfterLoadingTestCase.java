@@ -86,7 +86,8 @@ public class AddIndividualsAfterLoadingTestCase extends TestBase {
         r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
         assertFalse(r.getInstances(
                 f.getOWLDataAllValuesFrom(p,
-                        f.getOWLDatatypeRestriction(fdt, fLess20)), false)
+                        f.getOWLDatatypeRestriction(fdt, fLess20)),
+                false)
                 .containsEntity(i));
     }
 

@@ -104,7 +104,7 @@ public class OWLKnowledgeExplorationReasonerWrapper implements
 
     /**
      * @param r
-     *        reasoner
+     *            reasoner
      */
     public OWLKnowledgeExplorationReasonerWrapper(FaCTPlusPlusReasoner r) {
         this.r = r;
@@ -112,7 +112,7 @@ public class OWLKnowledgeExplorationReasonerWrapper implements
 
     /**
      * @param changes
-     *        changes
+     *            changes
      */
     public void ontologiesChanged(List<? extends OWLOntologyChange> changes) {
         r.ontologiesChanged(changes);
@@ -243,7 +243,7 @@ public class OWLKnowledgeExplorationReasonerWrapper implements
 
     /**
      * @param axiom
-     *        axiom to trace
+     *            axiom to trace
      * @return trace
      */
     public Set<OWLAxiom> getTrace(OWLAxiom axiom) {
@@ -261,10 +261,9 @@ public class OWLKnowledgeExplorationReasonerWrapper implements
     }
 
     @Override
-    public NodeSet<OWLClass>
-            getSubClasses(OWLClassExpression ce, boolean direct)
-                    throws ReasonerInterruptedException, TimeOutException,
-                    FreshEntitiesException, InconsistentOntologyException {
+    public NodeSet<OWLClass> getSubClasses(OWLClassExpression ce, boolean direct)
+            throws ReasonerInterruptedException, TimeOutException,
+            FreshEntitiesException, InconsistentOntologyException {
         return r.getSubClasses(ce, direct);
     }
 
@@ -375,10 +374,9 @@ public class OWLKnowledgeExplorationReasonerWrapper implements
     }
 
     @Override
-    public Node<OWLDataProperty>
-            getEquivalentDataProperties(OWLDataProperty pe)
-                    throws InconsistentOntologyException,
-                    ReasonerInterruptedException, TimeOutException {
+    public Node<OWLDataProperty> getEquivalentDataProperties(OWLDataProperty pe)
+            throws InconsistentOntologyException,
+            ReasonerInterruptedException, TimeOutException {
         return r.getEquivalentDataProperties(pe);
     }
 
