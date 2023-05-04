@@ -1,5 +1,7 @@
 package uk.ac.manchester.cs.factplusplus;
 
+import java.io.*;
+import java.nio.file.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -18,12 +20,54 @@ public class FaCTPlusPlus {
             // Load the FaCT++ JNI library
             String jniPath = System.getProperty("factpp.jni.path", "nope");
             if (jniPath.equals("nope")) {
-                System.loadLibrary("FaCTPlusPlusJNI");
+                try {
+                    System.loadLibrary("FaCTPlusPlusJNI");
+                } catch (UnsatisfiedLinkError e) {
+                    System.load(extractBundledLibrary());
+                }
             } else {
                 System.load(jniPath);
             }
             // init all the IDs used
             initMethodsFieldsIDs();
+        }
+    }
+
+    /**
+     * Extract the bundles native dependencies into a temporary file and return the
+     * path to the library that can the be loaded.
+     *
+     * @return The path of the extracted library file.
+     */
+    public static final String extractBundledLibrary() {
+        String arch = System.getProperty("os.arch");
+        String dirname;
+        if (arch.equals("x86_64") || arch.equals("amd64")) {
+            dirname = "64bit";
+        } else if (arch.equals("i386")) {
+            dirname = "32bit";
+        } else {
+            throw new RuntimeException("Architecture not supported by bundled native dependencies");
+        }
+        String os = System.getProperty("os.name");
+        String filename;
+        if (os.toLowerCase().startsWith("win")) {
+            filename = "FaCTPlusPlusJNI.dll";
+        } else if (os.toLowerCase().startsWith("lin")) {
+            filename = "libFaCTPlusPlusJNI.so";
+        } else if (os.toLowerCase().startsWith("mac")) {
+            filename = "libFaCTPlusPlusJNI.jnilib";
+        } else {
+            throw new RuntimeException("Operating system not supported by bundled native dependencies");
+        }
+        String resource = "/lib/native/" + dirname + "/" + filename;
+        InputStream nativeLib = FaCTPlusPlus.class.getResourceAsStream(resource);
+        try {
+            Path tempFile = Files.createTempFile("temp", filename);
+            Files.write(tempFile, nativeLib.readAllBytes());
+            return tempFile.toString();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to extract bundled native dependencies", e);
         }
     }
 
