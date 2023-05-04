@@ -63,7 +63,8 @@ public class FaCTPlusPlus {
         String resource = "/lib/native/" + dirname + "/" + filename;
         InputStream nativeLib = FaCTPlusPlus.class.getResourceAsStream(resource);
         try {
-            Path tempFile = Files.createTempFile("temp", filename);
+            Path tempFile = Files.createTempFile(FaCTPlusPlus.class.getName(), "-" + filename);
+            tempFile.toFile().deleteOnExit();
             Files.write(tempFile, nativeLib.readAllBytes());
             return tempFile.toString();
         } catch (IOException e) {

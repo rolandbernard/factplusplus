@@ -7,31 +7,15 @@ package conformancetests;
  You should have received a copy of the GNU Lesser General Public License along with this library; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA*/
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
-import org.semanticweb.owlapi.io.StringDocumentSource;
-import org.semanticweb.owlapi.io.SystemOutDocumentTarget;
-import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLException;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyChangeListener;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import org.semanticweb.owlapi.profiles.OWL2DLProfile;
-import org.semanticweb.owlapi.profiles.OWLProfileReport;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.io.*;
+import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.profiles.*;
+import org.semanticweb.owlapi.reasoner.*;
 
 @SuppressWarnings({ "javadoc", "null" })
 public class JUnitRunner {
-
-    private static final int _10000 = 1000000;
-
     public static void print(String premise) throws OWLException {
         OWLOntology o = OWLManager.createOWLOntologyManager()
                 .loadOntologyFromOntologyDocument(
@@ -150,22 +134,6 @@ public class JUnitRunner {
         // actual(conclusionOntology, b, reasoner);
         premiseOntology.getOWLOntologyManager().removeOntologyChangeListener(
                 (OWLOntologyChangeListener) reasoner);
-    }
-
-    private static OWLReasoner roundtrip(OWLReasoner r) {
-        try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            ObjectOutputStream stream = new ObjectOutputStream(out);
-            stream.writeObject(r);
-            stream.flush();
-            ByteArrayInputStream in = new ByteArrayInputStream(
-                    out.toByteArray());
-            ObjectInputStream inStream = new ObjectInputStream(in);
-            return (OWLReasoner) inStream.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     private void actual(OWLOntology conclusionOntology, StringBuilder b,

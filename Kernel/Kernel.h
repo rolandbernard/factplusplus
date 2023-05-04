@@ -117,9 +117,6 @@ private:	// members
 
 private:	// constants
 	static const char* Version;
-	static const char* SupportedDL;
-	static const char* Copyright;
-	static const char* ReleaseDate;
 		/// header of the file with internal state; defined in SaveLoad.cpp
 	static const char* InternalStateFileHeader;
 
