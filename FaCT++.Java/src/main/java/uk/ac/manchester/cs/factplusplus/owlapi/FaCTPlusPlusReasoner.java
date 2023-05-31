@@ -79,6 +79,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
                     InferenceType.SAME_INDIVIDUAL));
     private final OWLOntologyManager manager;
     private final OWLOntology rootOntology;
+    private final Set<OWLOntology> reasonerOntologies;
     private final BufferingMode bufferingMode;
     private final List<OWLOntologyChange> rawChanges = new ArrayList<>();
     // private final ReentrantReadWriteLock rawChangesLock = new
@@ -131,7 +132,11 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
             System.out.println(Thread.currentThread().getName()
                     + " OWLReasonerBase.handleRawOntologyChanges() " + changes);
         }
-        rawChanges.addAll(changes);
+        for (OWLOntologyChange change : changes) {
+            if (reasonerOntologies.contains(change.getOntology())) {
+                rawChanges.add(change);
+            }
+        }
         // We auto-flush the changes if the reasoner is non-buffering
         if (bufferingMode.equals(BufferingMode.NON_BUFFERING)) {
             flush();
@@ -208,12 +213,15 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
                 if (!reasonerAxioms.contains(ax)) {
                     added.add(ax);
                 }
+                removed.remove(ax);
             } else if (change instanceof RemoveAxiom) {
-                removed.add(change.getAxiom().getAxiomWithoutAnnotations());
+                OWLAxiom ax = change.getAxiom().getAxiomWithoutAnnotations();
+                if (reasonerAxioms.contains(ax)) {
+                    removed.add(ax);
+                }
+                added.remove(ax);
             }
         }
-        // in case an axiom was added and then removed without a flush()
-        added.removeAll(removed);
     }
 
     /**
@@ -257,6 +265,7 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     public FaCTPlusPlusReasoner(OWLOntology rootOntology,
             OWLReasonerConfiguration configuration, BufferingMode bufferingMode) {
         this.rootOntology = rootOntology;
+        this.reasonerOntologies = rootOntology.getImportsClosure();
         this.bufferingMode = bufferingMode;
         this.configuration = configuration;
         timeOut = configuration.getTimeOut();
