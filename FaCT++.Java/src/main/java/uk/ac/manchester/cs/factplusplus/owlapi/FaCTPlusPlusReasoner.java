@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import javax.xml.datatype.*;
 
@@ -90,7 +91,10 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     @Override
     public void ontologiesChanged(List<? extends OWLOntologyChange> changes) {
-        handleRawOntologyChanges(changes);
+        List<OWLOntologyChange> filtered = filterRawOntologyChanges(changes);
+        if (!filtered.isEmpty()) {
+            handleRawOntologyChanges(changes);
+        }
     }
 
     /**
@@ -118,6 +122,21 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     private final boolean log = false;
 
     /**
+     * Filter the changes to only include those that are for ontologies in the
+     * import closure of the root ontology. Necessary since a single
+     * {@code OWLOntologyManager} can contain multiple unrelated root ontologies.
+     *
+     * @param changes
+     *            The changes to be filtered.
+     * @return The changes from {@code changes} that are related to this reasoner.
+     */
+    private List<OWLOntologyChange> filterRawOntologyChanges(List<? extends OWLOntologyChange> changes) {
+        return changes.stream()
+                .filter(change -> reasonerOntologies.contains(change.getOntology()))
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Handles raw ontology changes. If the reasoner is a buffering reasoner
      * then the changes will be stored in a buffer. If the reasoner is a
      * non-buffering reasoner then the changes will be automatically flushed
@@ -126,16 +145,13 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      * @param changes
      *            The list of raw changes.
      */
-    private synchronized void handleRawOntologyChanges(
-            List<? extends OWLOntologyChange> changes) {
+    private void handleRawOntologyChanges(List<? extends OWLOntologyChange> changes) {
         if (log) {
             System.out.println(Thread.currentThread().getName()
                     + " OWLReasonerBase.handleRawOntologyChanges() " + changes);
         }
-        for (OWLOntologyChange change : changes) {
-            if (reasonerOntologies.contains(change.getOntology())) {
-                rawChanges.add(change);
-            }
+        synchronized (rawChanges) {
+            rawChanges.addAll(changes);
         }
         // We auto-flush the changes if the reasoner is non-buffering
         if (bufferingMode.equals(BufferingMode.NON_BUFFERING)) {
@@ -145,27 +161,33 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
 
     @Override
     public synchronized List<OWLOntologyChange> getPendingChanges() {
-        return new ArrayList<>(rawChanges);
+        synchronized (rawChanges) {
+            return new ArrayList<>(rawChanges);
+        }
     }
 
     @Override
     public synchronized Set<OWLAxiom> getPendingAxiomAdditions() {
-        if (rawChanges.size() > 0) {
-            Set<OWLAxiom> added = new HashSet<>();
-            computeDiff(added, new HashSet<OWLAxiom>());
-            return added;
+        synchronized (rawChanges) {
+            if (rawChanges.size() > 0) {
+                Set<OWLAxiom> added = new HashSet<>();
+                computeDiff(added, new HashSet<OWLAxiom>());
+                return added;
+            }
+            return Collections.emptySet();
         }
-        return Collections.emptySet();
     }
 
     @Override
     public synchronized Set<OWLAxiom> getPendingAxiomRemovals() {
-        if (rawChanges.size() > 0) {
-            Set<OWLAxiom> removed = new HashSet<>();
-            computeDiff(new HashSet<OWLAxiom>(), removed);
-            return removed;
+        synchronized (rawChanges) {
+            if (rawChanges.size() > 0) {
+                Set<OWLAxiom> removed = new HashSet<>();
+                computeDiff(new HashSet<OWLAxiom>(), removed);
+                return removed;
+            }
+            return Collections.emptySet();
         }
-        return Collections.emptySet();
     }
 
     /**
@@ -178,16 +200,19 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
     @Override
     public synchronized void flush() {
         // Process the changes
-        if (rawChanges.size() > 0) {
-            final Set<OWLAxiom> added = new HashSet<>();
-            final Set<OWLAxiom> removed = new HashSet<>();
-            computeDiff(added, removed);
-            reasonerAxioms.removeAll(removed);
-            reasonerAxioms.addAll(added);
-            rawChanges.clear();
-            if (!added.isEmpty() || !removed.isEmpty()) {
-                handleChanges(added, removed);
+        final Set<OWLAxiom> added = new HashSet<>();
+        final Set<OWLAxiom> removed = new HashSet<>();
+        synchronized (rawChanges) {
+            if (rawChanges.isEmpty()) {
+                return;
             }
+            computeDiff(added, removed);
+            rawChanges.clear();
+        }
+        reasonerAxioms.removeAll(removed);
+        reasonerAxioms.addAll(added);
+        if (!added.isEmpty() || !removed.isEmpty()) {
+            handleChanges(added, removed);
         }
     }
 
@@ -204,22 +229,23 @@ public class FaCTPlusPlusReasoner implements OWLReasoner,
      *            The logical axioms that have been removed from the imports closure
      *            of the reasoner root ontology
      */
-    private synchronized void computeDiff(Set<OWLAxiom> added,
-            Set<OWLAxiom> removed) {
-        for (OWLOntologyChange change : rawChanges) {
-            if (change instanceof AddAxiom) {
-                OWLAxiom ax = change.getAxiom().getAxiomWithoutAnnotations();
-                // check whether an axiom is new
-                if (!reasonerAxioms.contains(ax)) {
-                    added.add(ax);
+    private synchronized void computeDiff(Set<OWLAxiom> added, Set<OWLAxiom> removed) {
+        synchronized (rawChanges) {
+            for (OWLOntologyChange change : rawChanges) {
+                if (change instanceof AddAxiom) {
+                    OWLAxiom ax = change.getAxiom().getAxiomWithoutAnnotations();
+                    // check whether an axiom is new
+                    if (!reasonerAxioms.contains(ax)) {
+                        added.add(ax);
+                    }
+                    removed.remove(ax);
+                } else if (change instanceof RemoveAxiom) {
+                    OWLAxiom ax = change.getAxiom().getAxiomWithoutAnnotations();
+                    if (reasonerAxioms.contains(ax)) {
+                        removed.add(ax);
+                    }
+                    added.remove(ax);
                 }
-                removed.remove(ax);
-            } else if (change instanceof RemoveAxiom) {
-                OWLAxiom ax = change.getAxiom().getAxiomWithoutAnnotations();
-                if (reasonerAxioms.contains(ax)) {
-                    removed.add(ax);
-                }
-                added.remove(ax);
             }
         }
     }
